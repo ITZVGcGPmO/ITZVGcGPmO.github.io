@@ -1,1 +1,14 @@
 best site ever.
+<script type="text/javascript">
+function inIframe () {
+    try { return window.self !== window.top; }
+    catch (e) { return true; }
+}
+function main () {
+    // if (inIframe) { window.location = "http://www.yoururl.com"; } // if not in iframe, redirect to site
+
+    console.log(window.location);
+}
+</script>
+
+<body onload="main();">
