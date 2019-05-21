@@ -1,0 +1,86 @@
+{
+    "createdBy": "Redirector v3.2.1",
+    "createdAt": "2019-05-21T19:15:43.174Z",
+    "redirects": [
+        {
+            "description": "",
+            "exampleUrl": "https://adfoc.us/serve/sitelinks/?id=271228&url=https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer-win.exe",
+            "exampleResult": "https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2768/forge-1.12.2-14.23.5.2768-installer-win.exe",
+            "error": null,
+            "includePattern": "https://adfoc.us/serve/sitelinks/?id=*&url=*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$2",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "",
+            "exampleUrl": "https://deref-mail.com/mail/client/mv7obNujpFo/dereferrer/?redirectUrl=http%3A%2F%2Ffreedns.afraid.org%2Fproof%2F%3FROpn9arq9QMe",
+            "exampleResult": "http://freedns.afraid.org/proof/?ROpn9arq9QMe",
+            "error": null,
+            "includePattern": "https://deref-mail.com/mail/client/*/dereferrer/?redirectUrl=*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$2",
+            "patternType": "W",
+            "processMatches": "urlDecode",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "",
+            "exampleUrl": "https://discordapp.com/activity",
+            "exampleResult": "https://discordapp.com/channels/@me",
+            "error": null,
+            "includePattern": "https://discordapp.com/activity",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "https://discordapp.com/channels/@me",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "127.0.0.1:8080/ipfs => ipfs://",
+            "exampleUrl": "http://127.0.0.1:8080/ipfs/testsite",
+            "exampleResult": "ipfs://testsite",
+            "error": null,
+            "includePattern": "https?://127.0.0.1:8080/(ipfs|ipns)/(.*)",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$1://$2",
+            "patternType": "R",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        },
+        {
+            "description": "",
+            "exampleUrl": "https://www.reddit.com/r/uBlockOrigin/comments/8i2mop/regex_in_filter_rules/",
+            "exampleResult": "https://old.reddit.com/r/uBlockOrigin/comments/8i2mop/regex_in_filter_rules/",
+            "error": null,
+            "includePattern": "*www.reddit.com*",
+            "excludePattern": "",
+            "patternDesc": "",
+            "redirectUrl": "$1old.reddit.com$2",
+            "patternType": "W",
+            "processMatches": "noProcessing",
+            "disabled": false,
+            "appliesTo": [
+                "main_frame"
+            ]
+        }
+    ]
+}
