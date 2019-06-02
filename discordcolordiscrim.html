@@ -1,0 +1,100 @@
+<head>
+  <script type="text/javascript">
+    function formSubmit(form) {
+      var canvas = document.getElementById('ctx'),
+        ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.font = "bold 14px verdana, sans-serif";
+      ctx.textAlign = "start";
+      ctx.textBaseline = "top";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(form.dark.value, 0, 0);
+
+      var canvas2 = document.getElementById('ctx2'),
+        ctx2 = canvas2.getContext('2d');
+      ctx2.clearRect(0, 0, canvas2.width, canvas2.height)
+      ctx2.font = "bold 14px verdana, sans-serif";
+      ctx2.textAlign = "start";
+      ctx2.textBaseline = "top";
+      ctx2.fillStyle = "#36393f";
+      ctx2.fillText(form.light.value, 0, 0);
+
+      var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      var imgdata2 = ctx2.getImageData(0, 0, canvas.width, canvas.height);
+
+      var pastdither = 0;
+      for (var h = 0; h < canvas.height; h++) {
+        for (var w = 0; w < canvas.width; w++) {
+          var pixel = ctx.getImageData(w, h, 1, 1);
+          var data = pixel.data;
+          var pixel2 = ctx2.getImageData(w, h, 1, 1);
+          var data2 = pixel2.data;
+          if (data2[3] >= data[3]) {
+            if (pastdither % 2 == 0 || data2[3] > data[3]) {
+              ctx.putImageData(ctx2.getImageData(w, h, 1, 1), w, h);
+            }
+            pastdither++;
+          }
+        }
+      }
+    // return(canvas.toDataURL("image/png"))
+    };
+  </script>
+  <style type="text/css">
+    canvas#viewport {
+      border: 1px solid white;
+    }
+  </style>
+  <style type="text/css" id="stylecss"></style>
+  <script type="text/javascript">
+    if (typeof(Storage) !== "undefined") { // localstorage supported
+      document.getElementById("stylecss").innerHTML = localStorage.getItem("stylecss");
+    } else { // localstorage not supported
+      document.getElementById("stylecss").innerHTML = "body {background-image: url('https://i.imgur.com/bpRfH.gif');}";
+    }
+  </script>
+</head>
+<body>
+  <p>Discord Color Discrimination</p>
+  <form action="javascript:;" onsubmit="formSubmit(this)">
+    dmode: <input type="text" name="dark"><br>
+    lmode: <input type="text" name="light"><br>
+    <input type="submit" value="Generate">
+  </form>
+  <form name="thms">
+    <div>
+      theme:
+      <input type="radio" id="ch1" name="thm" value="dark">
+      <label for="ch1">dark</label>
+      <input type="radio" id="ch2" name="thm" value="light">
+      <label for="ch2">light</label>
+      <input type="radio" id="ch3" name="thm" value="nether">
+      <label for="ch3">nether</label>
+    </div>
+  </form>
+  <script>
+    var rad = document.thms.thm;
+    var prev = null;
+    for(var i = 0; i < rad.length; i++) {
+      rad[i].onclick = function() {
+        (prev)? console.log(prev.value):null;
+        if(this !== prev) {
+          prev = this;
+          if (this.value === 'dark') {
+            document.getElementById("stylecss").innerHTML = 'body {background-color: #36393f;}';
+          } else if (this.value === 'light') {
+            document.getElementById("stylecss").innerHTML = 'body {background-color: #fff;}';
+          } else if (this.value === 'nether') {
+            document.getElementById("stylecss").innerHTML = 'body {background-image: url("https://gamepedia.cursecdn.com/minecraft_gamepedia/e/e4/NetherPortal.gif");}';
+          }
+          if (typeof(Storage) !== "undefined") { // if localstorage supported
+            localStorage.setItem("stylecss", document.getElementById("stylecss").innerHTML);
+          }
+          console.log(this.value)
+        }
+      };
+    }
+  </script>
+  <canvas id="ctx" width="400" height="15"></canvas>
+  <canvas id="ctx2" width="400" height="15" style="display:none;"></canvas>
+</body>
